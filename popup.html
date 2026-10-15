@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fake News Detector</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="popup-header">
+      <h1>Fake News Detector</h1>
+      <p id="domain">Checking this tab…</p>
+    </header>
+
+    <section id="panel-loading" aria-live="polite">Checking this page…</section>
+
+    <section id="panel-unsupported" hidden>
+      <p>Open a normal website tab. Browser settings pages cannot be checked.</p>
+    </section>
+
+    <section id="panel-error" hidden>
+      <p>This page could not be checked. Reload it, then open this popup again.</p>
+    </section>
+
+    <section id="panel-result" hidden>
+      <div class="score-row">
+        <p id="score" class="score"></p>
+        <p id="status" class="status"></p>
+      </div>
+      <p id="headline" class="headline" hidden></p>
+      <p id="summary"></p>
+
+      <h2>Risk flags</h2>
+      <ul id="flags"></ul>
+
+      <div id="why-wrap">
+        <h2>Why this score</h2>
+        <ul id="factors"></ul>
+      </div>
+
+      <div id="sources-wrap">
+        <h2>Check the story</h2>
+        <ul id="sources" class="links"></ul>
+      </div>
+
+      <label class="switch">
+        <input id="enabled" type="checkbox" />
+        <span>Show the badge on this site</span>
+      </label>
+
+      <button id="refresh" type="button">Check again</button>
+      <p class="note">Automated estimate from the site and the headline. Not a fact-check.</p>
+    </section>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

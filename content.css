@@ -1,0 +1,219 @@
+:host {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--fnd-ink);
+  line-height: 1.45;
+}
+
+.fnd-wrap {
+  --fnd-ink: #14202b;
+  --fnd-muted: #3e5160;
+  --fnd-card: #ffffff;
+  --fnd-high: #0d6b3a;
+  --fnd-high-bg: #e5f6ec;
+  --fnd-caution: #8a5a00;
+  --fnd-caution-bg: #fff4d6;
+  --fnd-risk: #9d1c1c;
+  --fnd-risk-bg: #fdecec;
+  --fnd-satire: #5b21b6;
+  --fnd-satire-bg: #f3e8ff;
+  --fnd-neutral: #334155;
+  --fnd-neutral-bg: #f1f5f9;
+  font-size: 16px;
+  color: var(--fnd-ink);
+}
+
+.fnd-pill,
+.fnd-text-btn,
+.fnd-hide {
+  font: inherit;
+  cursor: pointer;
+}
+
+.fnd-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 2px solid var(--fnd-neutral);
+  background: #fff;
+  color: var(--fnd-ink);
+  box-shadow: 0 10px 28px rgba(16, 32, 48, 0.2);
+  font-weight: 700;
+}
+
+.fnd-pill.fnd-high { border-color: var(--fnd-high); }
+.fnd-pill.fnd-caution { border-color: var(--fnd-caution); }
+.fnd-pill.fnd-risk { border-color: var(--fnd-risk); }
+.fnd-pill.fnd-satire { border-color: var(--fnd-satire); }
+.fnd-pill.fnd-neutral { border-color: var(--fnd-neutral); }
+
+.fnd-card {
+  width: min(340px, calc(100vw - 32px));
+  max-height: min(70vh, 540px);
+  overflow: auto;
+  padding: 16px;
+  border-radius: 18px;
+  border: 2px solid var(--fnd-neutral);
+  background: var(--fnd-card);
+  box-shadow: 0 16px 40px rgba(16, 32, 48, 0.22);
+}
+
+.fnd-card.fnd-high { border-color: var(--fnd-high); }
+.fnd-card.fnd-caution { border-color: var(--fnd-caution); }
+.fnd-card.fnd-risk { border-color: var(--fnd-risk); }
+.fnd-card.fnd-satire { border-color: var(--fnd-satire); }
+
+.fnd-header,
+.fnd-score-row,
+.fnd-badge,
+.fnd-links {
+  display: flex;
+  align-items: center;
+}
+
+.fnd-header {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fnd-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.fnd-text-btn {
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #c5d0d8;
+  background: #fff;
+  color: var(--fnd-ink);
+}
+
+.fnd-score-row {
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.fnd-score,
+.fnd-neutral-label {
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.fnd-neutral-label {
+  font-size: 28px;
+}
+
+.fnd-high .fnd-score { color: var(--fnd-high); }
+.fnd-caution .fnd-score { color: var(--fnd-caution); }
+.fnd-risk .fnd-score { color: var(--fnd-risk); }
+.fnd-satire .fnd-score { color: var(--fnd-satire); }
+
+.fnd-badge {
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: var(--fnd-neutral-bg);
+}
+
+.fnd-badge.fnd-high { color: var(--fnd-high); background: var(--fnd-high-bg); }
+.fnd-badge.fnd-caution { color: var(--fnd-caution); background: var(--fnd-caution-bg); }
+.fnd-badge.fnd-risk { color: var(--fnd-risk); background: var(--fnd-risk-bg); }
+.fnd-badge.fnd-satire { color: var(--fnd-satire); background: var(--fnd-satire-bg); }
+
+.fnd-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--fnd-neutral);
+  flex: 0 0 auto;
+}
+
+.fnd-dot.fnd-high { background: var(--fnd-high); }
+.fnd-dot.fnd-caution { background: var(--fnd-caution); }
+.fnd-dot.fnd-risk { background: var(--fnd-risk); }
+.fnd-dot.fnd-satire { background: var(--fnd-satire); }
+.fnd-dot.fnd-neutral { background: var(--fnd-neutral); }
+
+.fnd-domain,
+.fnd-note,
+.fnd-headline {
+  color: var(--fnd-muted);
+}
+
+.fnd-domain {
+  display: block;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.fnd-summary,
+.fnd-headline,
+.fnd-note {
+  margin: 10px 0 0;
+}
+
+.fnd-headline {
+  font-style: italic;
+}
+
+h2 {
+  margin: 16px 0 6px;
+  font-size: 16px;
+}
+
+.fnd-list,
+.fnd-links {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.fnd-links {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  list-style: disc;
+}
+
+.fnd-up { color: var(--fnd-high); font-weight: 700; }
+.fnd-down { color: var(--fnd-risk); font-weight: 700; }
+
+a {
+  color: #0b4f6c;
+  font-weight: 700;
+}
+
+.fnd-hide {
+  margin-top: 14px;
+}
+
+.fnd-note {
+  font-size: 15px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #0b4f6c;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fnd-pill,
+  .fnd-card {
+    transition: none;
+  }
+}
+
+@media print {
+  :host {
+    display: none !important;
+  }
+}
