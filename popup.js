@@ -21,6 +21,7 @@ const whyWrap = document.querySelector("#why-wrap");
 const sourcesNode = document.querySelector("#sources");
 const sourcesWrap = document.querySelector("#sources-wrap");
 const enabledNode = document.querySelector("#enabled");
+const overlayEnabledNode = document.querySelector("#overlay-enabled");
 const refreshNode = document.querySelector("#refresh");
 
 let currentDomain = "";
@@ -39,14 +40,32 @@ enabledNode.addEventListener("change", async () => {
   }
 });
 
+overlayEnabledNode.addEventListener("change", async () => {
+  overlayEnabledNode.disabled = true;
+  try {
+    await chrome.storage.local.set({ overlayEnabled: overlayEnabledNode.checked });
+  } finally {
+    overlayEnabledNode.disabled = false;
+  }
+});
+
 refreshNode.addEventListener("click", () => {
   load(true);
 });
 
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area !== "local" || !changes.disabledDomains || !currentDomain) return;
-  const disabled = new Set(changes.disabledDomains.newValue || []);
-  enabledNode.checked = !disabled.has(currentDomain);
+  if (area !== "local") return;
+  if (changes.disabledDomains && currentDomain) {
+    const disabled = new Set(changes.disabledDomains.newValue || []);
+    enabledNode.checked = !disabled.has(currentDomain);
+  }
+  if (changes.overlayEnabled) {
+    overlayEnabledNode.checked = changes.overlayEnabled.newValue !== false;
+  }
+});
+
+chrome.storage.local.get({ overlayEnabled: true }).then(({ overlayEnabled }) => {
+  overlayEnabledNode.checked = overlayEnabled !== false;
 });
 
 load(false);

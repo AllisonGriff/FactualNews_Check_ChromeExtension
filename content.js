@@ -21,6 +21,7 @@ async function init() {
   let settledEnabled = true;
   let domain = "";
   let enabled = true;
+  let overlayEnabled = true;
   let runId = 0;
 
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
@@ -45,19 +46,34 @@ async function init() {
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
-    if (area !== "local" || !changes.disabledDomains || !domain) return;
-    const disabled = new Set(changes.disabledDomains.newValue || []);
-    const nextEnabled = !disabled.has(domain);
-    if (nextEnabled === enabled) return;
-    enabled = nextEnabled;
-    if (!enabled) {
-      settledEnabled = false;
-      runId += 1;
-      host.remove();
-      return;
+    if (area !== "local") return;
+    if (changes.overlayEnabled) {
+      overlayEnabled = changes.overlayEnabled.newValue !== false;
+      if (!overlayEnabled) {
+        host.remove();
+      } else if (enabled && lastResult && shouldShow(lastResult)) {
+        paint();
+      } else {
+        run();
+      }
     }
-    run();
+    if (changes.disabledDomains && domain) {
+      const disabled = new Set(changes.disabledDomains.newValue || []);
+      const nextEnabled = !disabled.has(domain);
+      if (nextEnabled === enabled) return;
+      enabled = nextEnabled;
+      if (!enabled) {
+        settledEnabled = false;
+        runId += 1;
+        host.remove();
+        return;
+      }
+      run();
+    }
   });
+
+  const settings = await chrome.storage.local.get({ overlayEnabled: true });
+  overlayEnabled = settings.overlayEnabled !== false;
 
   watchNavigation(() => run());
   await run();
@@ -100,7 +116,7 @@ async function init() {
   }
 
   function paint() {
-    if (!lastResult || !enabled) return;
+    if (!lastResult || !enabled || !overlayEnabled) return;
     if (!host.isConnected) document.documentElement.appendChild(host);
     if (!shadow) {
       shadow = host.attachShadow({ mode: "open" });
